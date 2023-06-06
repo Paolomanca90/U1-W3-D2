@@ -158,7 +158,7 @@
         const newP = document.createElement("p");
         newP.innerText = "questo é un nuovo paragrafo";
         console.log(newP);
-        const paragraph = document.querySelector("div>div>p");
+        const paragraph = document.querySelector("body>div>div");
         console.log(paragraph);
         paragraph.appendChild(newP);
       };
@@ -220,63 +220,132 @@
          La tabella avrà 5 elementi e questa struttura: immagine, nome prodotto, quantità, prezzo
       */
 
-      // const generateTable = function () {
-      //   const table = document.createElement("table");
-      //   const thead = document.createElement("thead");
-      //   const tbody = document.createComment("tbody");
+      const generateTable = function () {
+        const mytable = document.getElementById("tableArea");
+        mytable.innerHTML = `
+          <table>
+            <tbody>
+              <tr>
+                <th>Immagini</th>
+                <th>Nome prodotto</th>
+                <th>Quantità</th>
+                <th>Prezzo</th>
+              </tr>
+              <tr>
+                <td><img src='https://placedog.net/200/200'/></td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+              </tr>
+              <tr>
+                <td><img src='https://placedog.net/200/200'/></td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+              </tr>
+              <tr>
+                <td><img src='https://placedog.net/200/200'/></td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+              </tr>
+              <tr>
+                <td><img src='https://placedog.net/200/200'/></td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+              </tr>
+            </tbody>
+          </table>
+        `;
+        const table = document.querySelector("table");
+        table.style.border = "1px solid black";
+      };
 
-      //   table.appendChild(thead);
-      //   table.appendChild(tbody);
-
-      //   for (let i = 0; i < 4; i++) {
-      //     for (let y = 0; y < 5; y++) {
-      //       let td = document.createElement("td");
-      //     }
-      //     tbody.appendChild(td);
-      //   }
-
-      //   const tableIns = document.querySelector("body div");
-      //   tableIns.appendChild(table);
-      // };
-
-      // generateTable();
+      generateTable();
 
       /* ESERCIZIO 12
          Crea una funzione che aggiunga una riga alla tabella precedentemente creata e fornisca i dati necessari come parametri
       */
 
-      const addRow = function () {};
+      const addRow = function (immagine, nome_prodotto, quantità, prezzo) {
+        const tBody = document.querySelector("tbody");
+        const newTr = document.createElement("tr");
+
+        const td1 = document.createElement("td");
+        td1.innerHTML = immagine;
+        const td2 = document.createElement("td");
+        td2.innerText = nome_prodotto;
+        const td3 = document.createElement("td");
+        td3.innerText = quantità;
+        const td4 = document.createElement("td");
+        td4.innerText = prezzo;
+
+        newTr.appendChild(td1);
+        newTr.appendChild(td2);
+        newTr.appendChild(td3);
+        newTr.appendChild(td4);
+        tBody.appendChild(newTr);
+      };
+
+      addRow(`<img src ='https://placekitten.com/200'/>`, "cat", 1, 500);
 
       /* ESERCIZIO 14
         Crea una funzione che nasconda le immagini della tabella quando eseguita
       */
 
-      const hideAllImages = function () {};
+      const hideAllImages = function () {
+        const img = document.querySelectorAll("img");
+        img.forEach((i) => {
+          i.style.display = "none";
+        });
+      };
+
+      hideAllImages();
 
       /* EXTRA ESERCIZIO 15
         Crea una funzione che cambi il colore del h2 con id "changeMyColor" con un colore random ad ogni click ricevuto
       */
 
       const changeColorWithRandom = function () {
-        const secondList = document.querySelector("h2");
-        console.log(secondList);
-        secondList.style.color = function getRandomColor() {
-          let letters = "0123456789ABCDEF";
-          let color = "#";
-          for (let i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-          }
-          return color;
-        };
+        const secondList = document.getElementById("changeMyColor");
+        secondList.style.color =
+          "#" +
+          Math.floor(Math.random() * 255).toString(16) +
+          Math.floor(Math.random() * 255).toString(16) +
+          Math.floor(Math.random() * 255).toString(16);
+        console.log(secondList.style.color);
       };
-      const secondList = document.querySelector("h2");
+
+      const secondList = document.getElementById("changeMyColor");
       secondList.onclick = changeColorWithRandom;
 
       /* EXTRA ESERCIZIO 16
         Crea una funzione che elimini le vocali da ogni elemento testuale della pagina (puoi aiutarti con i nuovi metodi degli array di ES6)
       */
 
-      const deleteVowels = function () {};
+      const deleteVowels = function () {
+        const noV = document.querySelectorAll("h1", "h2", "h3", "p", "li");
+        const vowels = noV.split("");
+        vowels.forEach((el) => {
+          if (
+            el === "a" &&
+            el === "e" &&
+            el === "i" &&
+            el === "o" &&
+            el === "u" &&
+            el === "A" &&
+            el === "E" &&
+            el === "I" &&
+            el === "O" &&
+            el === "U"
+          ) {
+            el.remove();
+          }
+        });
+      };
+
+      deleteVowels();
     </script>
   </body>
 </html>

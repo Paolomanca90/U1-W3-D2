@@ -325,8 +325,8 @@
       */
 
       const deleteVowels = function () {
-        const noV = document.querySelectorAll("h1", "h2", "h3", "p", "li");
-        const vowels = noV.split("");
+        const noV = document.querySelectorAll("h1, h2, h3, p, li");
+        const vowels = noV.innerText.split("");
         vowels.forEach((el) => {
           if (
             el === "a" &&
